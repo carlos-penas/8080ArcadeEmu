@@ -2,6 +2,7 @@
 #define CPUOPCODES_H
 
 //Definition of the operation code for all of the CPU instructions
+
 #define NOP     0x00    //No operation
 #define LXIB    0x01    //Load inmediate value in register pair BC (B <- byte 3, C <- byte 2)
 #define STAXB   0x02    //Move content of the accumulator to the memory location stored in register pair BC
@@ -228,6 +229,36 @@
 #define CMPM    0xBE    //The content of the memory location stored in register pair HL is subtracted from the accumulator A. Accumulator remains unchanged (Z flag = 1 if A = B, CY flag = 1 if A < B)
 #define CMPA    0xBF    //The content of the accumulator is subtracted from the accumulator A. Accumulator remains unchanged (Z flag = 1 if A = B, CY flag = 1 if A < B)
 
+#define RNZ     0xC0    //If Z flag is not true, perform RET operation
+#define POPB    0xC1    //The content of the memory location stored in stack pointer SP is moved to the register pair BC (B <- SP adress + 1, C <- SP adress). Stack pointer SP is incremented by 2
+#define JNZ     0xC2    //If Z flag is not true, jump to the specified adress
+#define JMP     0xC3    //Jump to the specified adress
+#define CNZ     0xC4    //If Z flag is not true, perform CALL operation with specified data (Bytes 2 and 3)
+#define PUSB    0xC5    //The content of register pair BC is moved to the location stored on stack pointer SP - 2 and SP -1. Stack pointer SP is decremented by 2
+#define ADI     0xC6    //The value specified is added to the accumulator A and stored in the accumulator
+#define RST0    0xC7    //The next instruction ADRESS is moved to the stack pointer SP - 2 and SP -1. Stack pointer SP is decremented y 2. Jump to adress 8*(NNN)   0?
+#define RZ      0xC8    //If Z flag is true, perform RET operation
+#define RET     0xC9    //The content of the memory location stored in the stack pointer SP and that location + 1 are moved to the program counter PC. Stack Pointer SP is incremented by two
+#define JZ      0xCA    //If Z flag is true, jump to the specified adress
+//      -       0xCB
+#define CZ      0xCC    //If Z flag is not true, perform CALL operation with specified data (Bytes 2 and 3)
+#define CALL    0xCD    //The next instruction ADRESS is moved to the stack pointer SP - 2 and SP -1. Stack pointer SP is decremented y 2. Jump to the instruction specified.
+#define ACI     0xCE    //The value specified and the CY flag are added to the accumulator A and stored in the accumulator
+#define RST1    0xCF    //The next instruction ADRESS is moved to the stack pointer SP - 2 and SP -1. Stack pointer SP is decremented y 2. Jump to adress 8*(NNN)  8?
+#define RNC     0xD0    //If CY flag is not true, perform RET operation
+#define POPD    0xD1    //The content of the memory location stored in stack pointer SP is moved to the register pair DE (D <- SP adress + 1, E <- SP adress). Stack pointer SP is incremented by 2
+#define JNC     0xD2    //If CY flag is not true, jump to the specified adress
+#define OUT     0xD3    //The content of the accumulator A is placed on the 8 bit bi-directional data bus for transmition to the specified port
+#define CNC     0xD4    //If CY flag is not true, perform CALL operation with specified data (Bytes 2 and 3)
+#define PUSD    0xD5    //The content of register pair DE is moved to the location stored on stack pointer SP - 2 and SP -1. Stack pointer SP is decremented by 2
+#define SUI     0xD6    //The specified value is subtracted from the accumulator A and stored in the accumulator
+#define RST2    0xD7    //The next instruction ADRESS is moved to the stack pointer SP - 2 and SP -1. Stack pointer SP is decremented y 2. Jump to adress 8*(NNN)  10?
+#define RC      0xD8    //If CY flag is true, perform RET operation
+//      -       0xD9
+#define JC      0xDA    //If CY flag is true, jump to the specified adress
+
+
+#endif // OPCODES_H
 
 #endif /* CPUOPCODES_H */
 
