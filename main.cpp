@@ -16,12 +16,12 @@ int main() {
     char buffer[2048];
     int pointer;
     
-    file.read(buffer,sizeof(buffer));
-    pointer = 0;
-    
-    while(pointer < sizeof(buffer))
-    {
-        if(buffer[pointer] == )
-    }
+//    file.read(buffer,sizeof(buffer));
+//    pointer = 0;
+//    
+//    while(pointer < sizeof(buffer))
+//    {
+//        if(buffer[pointer] == )
+//    }
 }
 
