@@ -11,7 +11,7 @@ using std::string;
 using std::ifstream;
 
 int main() {
-    ifstream file("/home/carlos/programming/8080ArcadeEmu/documentation/invaders.h");
+    ifstream file("/home/carlos/programming/8080ArcadeEmu/documentation/space_invaders/invaders.h");
     
     unsigned char buffer[2048];
     int pointer;
@@ -124,7 +124,7 @@ int main() {
                 break;
                 
             case MVID:
-                printf("MVI     D, #$%02X", buffer[pointer+1]);
+                printf("MVI     D, #$%02X\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -194,7 +194,7 @@ int main() {
                 break;
                 
             case MVIH:
-                printf("MVI     H, #$%02X", buffer[pointer+1]);
+                printf("MVI     H, #$%02X\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -209,7 +209,7 @@ int main() {
                 break;
                 
             case LHLD:
-                printf("LHLD    ($%02X%02X)", buffer[pointer+2], buffer[pointer+1]);
+                printf("LHLD    ($%02X%02X)\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
             
@@ -264,7 +264,7 @@ int main() {
                 break;
                 
             case MVIM:
-                printf("MVI     M, #$%02X", buffer[pointer+1]);
+                printf("MVI     M, #$%02X\n", buffer[pointer+1]);
                 pointer++;
                 break;
                 
@@ -707,90 +707,541 @@ int main() {
                 printf("ADC     A\n");
                 pointer++;
                 break;
-                
-            //
+
             case SUBB:
-                printf("SUB      B\n");
+                printf("SUB     B\n");
                 pointer++;
                 break;
                 
             case SUBC:
-                printf("SUB      C\n");
+                printf("SUB     C\n");
                 pointer++;
                 break;
                 
             case SUBD:
-                printf("SUB      D\n");
+                printf("SUB     D\n");
                 pointer++;
                 break;
                 
             case SUBE:
-                printf("SUB      E\n");
+                printf("SUB     E\n");
                 pointer++;
                 break;
                 
             case SUBH:
-                printf("SUB      H\n");
+                printf("SUB     H\n");
                 pointer++;
                 break;
                 
             case SUBL:
-                printf("SUB      L\n");
+                printf("SUB     L\n");
                 pointer++;
                 break;
                 
             case SUBM:
-                printf("SUB      M\n");
+                printf("SUB     M\n");
                 pointer++;
                 break;
                 
             case SUBA:
-                printf("SUB      A\n");
+                printf("SUB     A\n");
                 pointer++;
                 break;
-            
-            //
+
             case SBBB:
-                printf("SBB      B\n");
+                printf("SBB     B\n");
                 pointer++;
                 break;
                 
             case SBBC:
-                printf("SBB      C\n");
+                printf("SBB     C\n");
                 pointer++;
                 break;
                 
             case SBBD:
-                printf("SBB      D\n");
+                printf("SBB     D\n");
                 pointer++;
                 break;
                 
             case SBBE:
-                printf("SBB      E\n");
+                printf("SBB     E\n");
                 pointer++;
                 break;
                 
             case SBBH:
-                printf("SBB      H\n");
+                printf("SBB     H\n");
                 pointer++;
                 break;
                 
             case SBBL:
-                printf("SBB      L\n");
+                printf("SBB     L\n");
                 pointer++;
                 break;
                 
             case SBBM:
-                printf("SBB      M\n");
+                printf("SBB     M\n");
                 pointer++;
                 break;
                 
             case SBBA:
-                printf("SBB      A\n");
+                printf("SBB     A\n");
                 pointer++;
                 break;
             
-            
+            case ANAB:
+                printf("ANA     B\n");
+                pointer++;
+                break;
+                
+            case ANAC:
+                printf("ANA     C\n");
+                pointer++;
+                break;
+                
+            case ANAD:
+                printf("ANA     D\n");
+                pointer++;
+                break;
+                
+            case ANAE:
+                printf("ANA     E\n");
+                pointer++;
+                break;
+                
+            case ANAH:
+                printf("ANA     H\n");
+                pointer++;
+                break;
+                
+            case ANAL:
+                printf("ANA     L\n");
+                pointer++;
+                break;
+                
+            case ANAM:
+                printf("ANA     M\n");
+                pointer++;
+                break;
+                
+            case ANAA:
+                printf("ANA     A\n");
+                pointer++;
+                break;
+                
+            case XRAB:
+                printf("XRA     B\n");
+                pointer++;
+                break;
+                
+            case XRAC:
+                printf("XRA     C\n");
+                pointer++;
+                break;
+                
+            case XRAD:
+                printf("XRA     D\n");
+                pointer++;
+                break;
+                
+            case XRAE:
+                printf("XRA     E\n");
+                pointer++;
+                break;
+                
+            case XRAH:
+                printf("XRA     H\n");
+                pointer++;
+                break;
+                
+            case XRAL:
+                printf("XRA     L\n");
+                pointer++;
+                break;
+                
+            case XRAM:
+                printf("XRA     M\n");
+                pointer++;
+                break;
+                
+            case XRAA:
+                printf("XRA     A\n");
+                pointer++;
+                break;
+                
+            case ORAB:
+                printf("ORA     B\n");
+                pointer++;
+                break;
+                
+            case ORAC:
+                printf("ORA     C\n");
+                pointer++;
+                break;
+                
+            case ORAD:
+                printf("ORA     D\n");
+                pointer++;
+                break;
+                
+            case ORAE:
+                printf("ORA     E\n");
+                pointer++;
+                break;
+                
+            case ORAH:
+                printf("ORA     H\n");
+                pointer++;
+                break;
+                
+            case ORAL:
+                printf("ORA     L\n");
+                pointer++;
+                break;
+                
+            case ORAM:
+                printf("ORA     M\n");
+                pointer++;
+                break;
+                
+            case ORAA:
+                printf("ORA     A\n");
+                pointer++;
+                break;
+                
+            case CMPB:
+                printf("CMP     B\n");
+                pointer++;
+                break;
+                
+            case CMPC:
+                printf("CMP     C\n");
+                pointer++;
+                break;
+                
+            case CMPD:
+                printf("CMP     D\n");
+                pointer++;
+                break;
+                
+            case CMPE:
+                printf("CMP     E\n");
+                pointer++;
+                break;
+                
+            case CMPH:
+                printf("CMP     H\n");
+                pointer++;
+                break;
+                
+            case CMPL:
+                printf("CMP     L\n");
+                pointer++;
+                break;
+                
+            case CMPM:
+                printf("CMP     M\n");
+                pointer++;
+                break;
+                
+            case CMPA:
+                printf("CMP     A\n");
+                pointer++;
+                break;
+                
+            case RNZ:
+                printf("RNZ\n");
+                pointer++;
+                break;
+                
+            case POPB:
+                printf("POP     B\n");
+                pointer++;
+                break;
+                
+            case JNZ:
+                printf("JNZ     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case JMP:
+                printf("JMP     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case CNZ:
+                printf("CNZ     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case PUSHB:
+                printf("PUSH    B\n");
+                pointer++;
+                break;
+                
+            case ADI:
+                printf("ADI     #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case RST0:
+                printf("RST     0\n");
+                pointer++;
+                break;
+                
+            case RZ:
+                printf("RZ\n");
+                pointer++;
+                break;
+                
+            case RET:
+                printf("RET\n");
+                pointer++;
+                break;
+                
+            case JZ:
+                printf("JZ      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case CZ:
+                printf("CZ      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case CALL:
+                printf("CALL    #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case ACI:
+                printf("ACI     #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case RST1:
+                printf("RST     1\n");
+                pointer++;
+                break;
+                
+            case RNC:
+                printf("RNC\n");
+                pointer++;
+                break;
+                
+            case POPD:
+                printf("POP     D\n");
+                pointer++;
+                break;
+                
+            case JNC:
+                printf("JNC     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case OUT:
+                printf("OUT     #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case CNC:
+                printf("CNC     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case PUSHD:
+                printf("PUSH    D\n");
+                pointer++;
+                break;
+                
+            case SUI:
+                printf("SUI     #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case RST2:
+                printf("RST     2\n");
+                pointer++;
+                break;
+                
+            case RC:
+                printf("RC\n");
+                pointer++;
+                break;
+                
+            case JC:
+                printf("JC      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case IN:
+                printf("IN      #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case CC:
+                printf("CC      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer;
+                break;
+                
+            case SBI:
+                printf("SBI     #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case RST3:
+                printf("RST     3\n");
+                pointer++;
+                break;
+                
+            case RPO:
+                printf("RPO\n");
+                pointer++;
+                break;
+                
+            case POPH:
+                printf("POP     H\n");
+                pointer++;
+                break;
+                
+            case JPO:
+                printf("JPO     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case XTHL:
+                printf("XTHL\n");
+                pointer++;
+                break;
+                
+            case CPO:
+                printf("CPO     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case PUSHH:
+                printf("PUSH    H\n");
+                pointer++;
+                break;
+                
+            case ANI:
+                printf("ANI     #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case RST4:
+                printf("RST     4\n");
+                pointer++;
+                break;
+                
+            case RPE:
+                printf("RPE\n");
+                pointer++;
+                break;
+                
+            case PCHL:
+                printf("PCHL\n");
+                pointer++;
+                break;
+                
+            case JPE:
+                printf("JPE     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case XCHG:
+                printf("XCHG\n");
+                pointer++;
+                break;
+                
+            case CPE:
+                printf("CPE     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case XRI:
+                printf("XRI     #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case RST5:
+                printf("RST     5\n");
+                pointer++;
+                break;
+                
+            case RP:
+                printf("RP\n");
+                pointer++;
+                break;
+                
+            case POPPSW:
+                printf("POP     PSW\n");
+                pointer++;
+                break;
+                
+            case JP:
+                printf("JP      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case DI:
+                printf("DI\n");
+                pointer++;
+                break;
+                
+            case CP:
+                printf("CP      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case PUSHPSW:
+                printf("PUSH    PSW\n");
+                pointer++;
+                break;
+                
+            case ORI:
+                printf("ORI     #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case RST6:
+                printf("RST     6\n");
+                pointer++;
+                break;
+                
+            case RM:
+                printf("RM\n");
+                pointer++;
+                break;
+                
+            case SPHL:
+                printf("SPHL\n");
+                pointer++;
+                break;
+                
+            case JM:
+                printf("JM      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case EI:
+                printf("EI\n");
+                pointer++;
+                break;
+                
+            case CM:
+                printf("CM      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                pointer+=3;
+                break;
+                
+            case CPI:
+                printf("CPI     #$%02X\n", buffer[pointer+1]);
+                pointer+=2;
+                break;
+                
+            case RST7:
+                printf("RST     7\n");
+                pointer++;
+                break;
         }
     }
 }
