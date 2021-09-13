@@ -248,7 +248,7 @@
 #define RNC     0xD0    //If CY flag is not true, perform RET operation
 #define POPD    0xD1    //The content of the memory location stored in stack pointer SP is moved to the register pair DE (D <- SP adress + 1, E <- SP adress). Stack pointer SP is incremented by 2
 #define JNC     0xD2    //If CY flag is not true, jump to the specified adress
-#define OUT     0xD3    //The content of the accumulator A is placed on the 8 bit bi-directional data bus for transmition to the specified port
+#define OUT     0xD3    //The content of the accumulator A is placed on the 8 bit bi-directional data bus for transmition to the port specified in byte 2
 #define CNC     0xD4    //If CY flag is not true, perform CALL operation with specified data (Bytes 2 and 3)
 #define PUSHD   0xD5    //The content of register pair DE is moved to the location stored on stack pointer SP - 2 and SP -1. Stack pointer SP is decremented by 2
 #define SUI     0xD6    //The specified value is subtracted from the accumulator A and stored in the accumulator
@@ -256,7 +256,7 @@
 #define RC      0xD8    //If CY flag is true, perform RET operation
 //      -       0xD9
 #define JC      0xDA    //If CY flag is true, jump to the specified adress
-#define IN      0xDB    //The value on the 8 bit bi-directional data bus is placed on the accumulator A
+#define IN      0xDB    //The value on the 8 bit bi-directional data bus specified in byte 2 is placed on the accumulator A
 #define CC      0xDC    //If CY flag is true, perform CALL operation with specified data (Bytes 2 and 3)
 //      -       0xDD
 #define SBI     0xDE    //The specified value and the CY flag are substracted from the accumulator A and stored in the accumulator
