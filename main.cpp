@@ -11,16 +11,16 @@ using std::string;
 using std::ifstream;
 
 int main() {
-    ifstream file("/home/carlos/programming/8080ArcadeEmu/documentation/space_invaders/invaders.h");
+    ifstream file("/home/carlos/programming/8080ArcadeEmu/documentation/space_invaders/spaceInvaders.rom");
     
-    unsigned char buffer[2048];
-    int pointer;
+    unsigned char buffer[8192];
     
     file.read((char*)buffer,sizeof(buffer));
-    pointer = 0;
+    unsigned int pointer = 0;
     
     while(pointer < sizeof(buffer))
     {
+        printf("%04X   ", pointer);
         switch(buffer[pointer])
         {
             case NOP:
@@ -29,7 +29,7 @@ int main() {
                 break;
                 
             case LXIB:
-                printf("LXI    B, #$%02X%02X\n",buffer[pointer+2],buffer[pointer+1]);
+                printf("LXI     B, #$%02X%02X\n",buffer[pointer+2],buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -165,7 +165,7 @@ int main() {
                 
             case RAR:
                 printf("RAR\n");
-                pointer;
+                pointer++;
                 break;
                 
             case LXIH:
@@ -265,7 +265,7 @@ int main() {
                 
             case MVIM:
                 printf("MVI     M, #$%02X\n", buffer[pointer+1]);
-                pointer++;
+                pointer+=2;
                 break;
                 
             case STC:
@@ -1080,7 +1080,7 @@ int main() {
                 
             case CC:
                 printf("CC      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
-                pointer;
+                pointer+=3;
                 break;
                 
             case SBI:
@@ -1240,6 +1240,11 @@ int main() {
                 
             case RST7:
                 printf("RST     7\n");
+                pointer++;
+                break;
+                
+            default:
+                printf("CODE %02X\n", buffer[pointer]);            
                 pointer++;
                 break;
         }
