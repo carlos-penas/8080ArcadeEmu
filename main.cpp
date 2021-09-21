@@ -4,21 +4,38 @@
 #include <fstream>
 
 #include "cpuOpCodes.h"
+#include "CPU.h"
+
+#define ROMPATH "/home/carlos/programming/8080ArcadeEmu/documentation/space_invaders/spaceInvaders.rom"
 
 using std::cout;
 using std::endl;
 using std::string;
 using std::ifstream;
 
+void disassembleROM(unsigned char* buffer, int size);
+
+
 int main() {
-    ifstream file("/home/carlos/programming/8080ArcadeEmu/documentation/space_invaders/spaceInvaders.rom");
+    ifstream file(ROMPATH);
     
+    //ROM is read to the buffer
     unsigned char buffer[8192];
-    
     file.read((char*)buffer,sizeof(buffer));
+    
+    //disassembleROM(buffer, sizeof(buffer));
+    
+    CPU cpu;
+    
+    
+}
+
+
+void disassembleROM(unsigned char* buffer, int size)
+{
     unsigned int pointer = 0;
     
-    while(pointer < sizeof(buffer))
+    while(pointer < size)
     {
         printf("%04X   ", pointer);
         switch(buffer[pointer])
@@ -578,7 +595,7 @@ int main() {
                 pointer++;
                 break;
                 
-            case HLT:
+            case HALT:
                 printf("HLT\n");
                 pointer++;
                 break;
@@ -1250,4 +1267,3 @@ int main() {
         }
     }
 }
-
