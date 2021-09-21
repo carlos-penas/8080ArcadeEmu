@@ -29,7 +29,7 @@ int main() {
                 break;
                 
             case LXIB:
-                printf("LXI     B, #$%02X%02X\n",buffer[pointer+2],buffer[pointer+1]);
+                printf("LXI     B, #$%02hhX%02hhX\n",buffer[pointer+2],buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -54,7 +54,7 @@ int main() {
                 break;
             
             case MVIB:
-                printf("MVI     B, #$%02X\n",buffer[pointer +1]);
+                printf("MVI     B, #$%02hhX\n",buffer[pointer +1]);
                 pointer+=2;
                 break;
                 
@@ -89,7 +89,7 @@ int main() {
                 break;
                 
             case MVIC:
-                printf("MVI     C, #$%02X\n",buffer[pointer+1]);
+                printf("MVI     C, #$%02hhX\n",buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -99,7 +99,7 @@ int main() {
                 break;
                 
             case LXID:
-                printf("LXI     D, #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("LXI     D, #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -124,7 +124,7 @@ int main() {
                 break;
                 
             case MVID:
-                printf("MVI     D, #$%02X\n", buffer[pointer+1]);
+                printf("MVI     D, #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -159,7 +159,7 @@ int main() {
                 break;
                 
             case MVIE:
-                printf("MVI     E, #$%02X\n", buffer[pointer+1]);
+                printf("MVI     E, #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -169,12 +169,12 @@ int main() {
                 break;
                 
             case LXIH:
-                printf("LXI     H, #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("LXI     H, #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case SHLD:
-                printf("SHLD    #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("SHLD    #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -194,7 +194,7 @@ int main() {
                 break;
                 
             case MVIH:
-                printf("MVI     H, #$%02X\n", buffer[pointer+1]);
+                printf("MVI     H, #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -209,7 +209,7 @@ int main() {
                 break;
                 
             case LHLD:
-                printf("LHLD    ($%02X%02X)\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("LHLD    ($%02hhX%02hhX)\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
             
@@ -229,7 +229,7 @@ int main() {
                 break;
                 
             case MVIL:
-                printf("MVI     L, #$%02X\n", buffer[pointer+1]);
+                printf("MVI     L, #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -239,12 +239,12 @@ int main() {
                 break;
                 
             case LXISP:
-                printf("LXI     SP, #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("LXI     SP, #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case STA:
-                printf("STA     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("STA     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -264,7 +264,7 @@ int main() {
                 break;
                 
             case MVIM:
-                printf("MVI     M, #$%02X\n", buffer[pointer+1]);
+                printf("MVI     M, #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -279,7 +279,7 @@ int main() {
                 break;
                 
             case LDA:
-                printf("LDA     ($%02X%02X)\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("LDA     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -299,7 +299,7 @@ int main() {
                 break;
                 
             case MVIA:
-                printf("MVI     A, #$%02X\n", buffer[pointer+1]);
+                printf("MVI     A, #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -959,17 +959,17 @@ int main() {
                 break;
                 
             case JNZ:
-                printf("JNZ     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("JNZ     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case JMP:
-                printf("JMP     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("JMP     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case CNZ:
-                printf("CNZ     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("CNZ     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -979,7 +979,7 @@ int main() {
                 break;
                 
             case ADI:
-                printf("ADI     #$%02X\n", buffer[pointer+1]);
+                printf("ADI     #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -999,22 +999,22 @@ int main() {
                 break;
                 
             case JZ:
-                printf("JZ      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("JZ      #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case CZ:
-                printf("CZ      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("CZ      #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case CALL:
-                printf("CALL    #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("CALL    #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case ACI:
-                printf("ACI     #$%02X\n", buffer[pointer+1]);
+                printf("ACI     #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -1034,17 +1034,17 @@ int main() {
                 break;
                 
             case JNC:
-                printf("JNC     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("JNC     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case OUT:
-                printf("OUT     #$%02X\n", buffer[pointer+1]);
+                printf("OUT     #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
             case CNC:
-                printf("CNC     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("CNC     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -1054,7 +1054,7 @@ int main() {
                 break;
                 
             case SUI:
-                printf("SUI     #$%02X\n", buffer[pointer+1]);
+                printf("SUI     #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -1069,22 +1069,22 @@ int main() {
                 break;
                 
             case JC:
-                printf("JC      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("JC      #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case IN:
-                printf("IN      #$%02X\n", buffer[pointer+1]);
+                printf("IN      #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
             case CC:
-                printf("CC      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("CC      #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case SBI:
-                printf("SBI     #$%02X\n", buffer[pointer+1]);
+                printf("SBI     #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -1104,7 +1104,7 @@ int main() {
                 break;
                 
             case JPO:
-                printf("JPO     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("JPO     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -1114,7 +1114,7 @@ int main() {
                 break;
                 
             case CPO:
-                printf("CPO     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("CPO     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -1124,7 +1124,7 @@ int main() {
                 break;
                 
             case ANI:
-                printf("ANI     #$%02X\n", buffer[pointer+1]);
+                printf("ANI     #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -1144,7 +1144,7 @@ int main() {
                 break;
                 
             case JPE:
-                printf("JPE     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("JPE     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -1154,12 +1154,12 @@ int main() {
                 break;
                 
             case CPE:
-                printf("CPE     #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("CPE     #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case XRI:
-                printf("XRI     #$%02X\n", buffer[pointer+1]);
+                printf("XRI     #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -1179,7 +1179,7 @@ int main() {
                 break;
                 
             case JP:
-                printf("JP      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("JP      #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -1189,7 +1189,7 @@ int main() {
                 break;
                 
             case CP:
-                printf("CP      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("CP      #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -1199,7 +1199,7 @@ int main() {
                 break;
                 
             case ORI:
-                printf("ORI     #$%02X\n", buffer[pointer+1]);
+                printf("ORI     #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -1219,7 +1219,7 @@ int main() {
                 break;
                 
             case JM:
-                printf("JM      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("JM      #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
@@ -1229,12 +1229,12 @@ int main() {
                 break;
                 
             case CM:
-                printf("CM      #$%02X%02X\n", buffer[pointer+2], buffer[pointer+1]);
+                printf("CM      #$%02hhX%02hhX\n", buffer[pointer+2], buffer[pointer+1]);
                 pointer+=3;
                 break;
                 
             case CPI:
-                printf("CPI     #$%02X\n", buffer[pointer+1]);
+                printf("CPI     #$%02hhX\n", buffer[pointer+1]);
                 pointer+=2;
                 break;
                 
@@ -1244,7 +1244,7 @@ int main() {
                 break;
                 
             default:
-                printf("CODE %02X\n", buffer[pointer]);            
+                printf("CODE %02hhX\n", buffer[pointer]);            
                 pointer++;
                 break;
         }
