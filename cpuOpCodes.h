@@ -136,7 +136,7 @@
 #define MOVMH   0x74    //The content of register H is moved to the memory location stored in register pair HL
 #define MOVML   0x75    //The content of register L is moved to the memory location stored in register pair HL
 
-#define HLT     0x76    //The CPU is stopped. Register and flags stay the same.
+#define HALT    0x76    //The CPU is stopped. Register and flags stay the same.
 #define MOVMA   0x77    //The content of the accumulator A is moved to the memory location stored in register pair HL
 
 //Move
