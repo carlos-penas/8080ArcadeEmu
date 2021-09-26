@@ -25,7 +25,10 @@ int main() {
     
     //disassembleROM(buffer, sizeof(buffer));
     
+    //Start the CPU
     CPU cpu;
+    cpu.loadProgram(buffer,8192);
+    cpu.run();
     
     
 }
