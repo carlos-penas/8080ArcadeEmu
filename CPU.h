@@ -9,10 +9,7 @@ public:
     
     void loadProgram(unsigned char *program, int size);
     
-    void run();
-    
-    void executeOperation();
-    
+    void run();    
     
 private:
     //Program counter
@@ -28,16 +25,25 @@ private:
     uint8_t registerL;
     
     //Stack Pointer
-    int stackPointer;
+    int sp;
     
     //Memory
     uint8_t memory[0x6000];
             
+    //Condition Bits
+    bool C;    //Carry Bit
+    bool AC;    //Auxiliary Carry Bit
+    bool S;    //Sign Bit
+    bool Z;    //Zero Bit
+    bool P;    //Parity Bit
     
-    //Flags
-    bool CF;
-    bool ZF;
-    bool HLT;
+    bool HLT;   //Halt Flag
+    
+    int executeOperation();
+    
+    void unimplementedInstruction();
+    
+    int parity(uint8_t value);
 
 };
 
