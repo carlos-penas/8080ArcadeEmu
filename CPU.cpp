@@ -53,7 +53,10 @@ int CPU::executeOperation()
     {
         case NOP:
             break;
-        case 0x01:
+        case LXIB:
+            registerB = memory[pc+2];
+            registerC = memory[pc+1];
+            readBytes+=2;
             break;
         case 0x02: unimplementedInstruction(); break;
         case 0x03: unimplementedInstruction(); break;
@@ -73,11 +76,18 @@ int CPU::executeOperation()
             break;
         case 0x07: unimplementedInstruction(); break;
         case 0x08: unimplementedInstruction(); break;
-        case 0x09: unimplementedInstruction(); break;
+        case DADB:
+        {
+            uint32_t result = ((registerB << 8) | registerC) + ((registerH << 8) | registerL);
+            C = (result > 0xFFFF);
+            registerH = (result & 0xFF00) >> 8;
+            registerL = result & 0xFF;
+        }
+            break;
         case 0x0A: unimplementedInstruction(); break;
         case 0x0B: unimplementedInstruction(); break;
         case 0x0C: unimplementedInstruction(); break;
-        case 0x0D: unimplementedInstruction(); break;
+        case DCRC: unimplementedInstruction(); break;
         case MVIC:
             registerC = memory[pc+1];
             readBytes+=1;
@@ -103,7 +113,14 @@ int CPU::executeOperation()
         case 0x16: unimplementedInstruction(); break;
         case 0x17: unimplementedInstruction(); break;
         case 0x18: unimplementedInstruction(); break;
-        case 0x19: unimplementedInstruction(); break;
+        case DADD: 
+        {
+            uint32_t result = ((registerD << 8) | registerE) + ((registerH << 8) | registerL);
+            C = (result > 0xFFFF);
+            registerH = (result & 0xFF00) >> 8;
+            registerL = result & 0xFF;
+        }
+            break;
         case LDAXD:
             registerA = memory[(registerD << 8) | registerE];
             break;
@@ -129,10 +146,20 @@ int CPU::executeOperation()
             break;
         case 0x24: unimplementedInstruction(); break;
         case 0x25: unimplementedInstruction(); break;
-        case 0x26: unimplementedInstruction(); break;
+        case MVIH:
+            registerH = memory[pc+1];
+            readBytes+=1;
+            break;
         case 0x27: unimplementedInstruction(); break;
         case 0x28: unimplementedInstruction(); break;
-        case 0x29: unimplementedInstruction(); break;
+        case DADH:
+        {
+            uint32_t result = ((registerH << 8) | registerL) + ((registerH << 8) | registerL);
+            C = (result > 0xFFFF);
+            registerH = (result & 0xFF00) >> 8;
+            registerL = result & 0xFF;
+        }  
+            break;
         case 0x2A: unimplementedInstruction(); break;
         case 0x2B: unimplementedInstruction(); break;
         case 0x2C: unimplementedInstruction(); break;
@@ -212,8 +239,9 @@ int CPU::executeOperation()
         case 0x6C: unimplementedInstruction(); break;
         case 0x6D: unimplementedInstruction(); break;
         case 0x6E: unimplementedInstruction(); break;
-        case 0x6F: unimplementedInstruction(); break;
-        
+        case MOVLA: 
+            registerL = registerA;
+            break;
         case 0x70: unimplementedInstruction(); break;
         case 0x71: unimplementedInstruction(); break;
         case 0x72: unimplementedInstruction(); break;
@@ -304,7 +332,11 @@ int CPU::executeOperation()
         case 0xBF: unimplementedInstruction(); break;
         
         case 0xC0: unimplementedInstruction(); break;
-        case 0xC1: unimplementedInstruction(); break;
+        case POPB:
+            registerB = memory[sp+1];
+            registerC = memory[sp];
+            sp+=2;
+            break;
         case JNZ:
             if(!Z)
             {
@@ -319,7 +351,11 @@ int CPU::executeOperation()
             readBytes = 0;
             break;
         case 0xC4: unimplementedInstruction(); break;
-        case 0xC5: unimplementedInstruction(); break;
+        case PUSHB:
+            memory[sp-1] = registerB;
+            memory[sp-2] = registerC;
+            sp-=2;
+            break;
         case 0xC6: unimplementedInstruction(); break;
         case 0xC7: unimplementedInstruction(); break;
         case 0xC8: unimplementedInstruction(); break;
@@ -342,11 +378,22 @@ int CPU::executeOperation()
         case 0xCF: unimplementedInstruction(); break;
         
         case 0xD0: unimplementedInstruction(); break;
-        case 0xD1: unimplementedInstruction(); break;
+        case POPD:
+            registerD = memory[sp+1];
+            registerE = memory[sp];
+            sp+=2;
+            break;
         case 0xD2: unimplementedInstruction(); break;
-        case 0xD3: unimplementedInstruction(); break;
+        case OUT:
+            //PENDIENTE DE SABER COMO FUNCIONA I/0
+            readBytes+=1;
+            break;
         case 0xD4: unimplementedInstruction(); break;
-        case PUSHD: unimplementedInstruction(); break;
+        case PUSHD:
+            memory[sp-1] = registerD;
+            memory[sp-2] = registerE;
+            sp-=2;
+            break;
         case 0xD6: unimplementedInstruction(); break;
         case 0xD7: unimplementedInstruction(); break;
         case 0xD8: unimplementedInstruction(); break;
@@ -359,17 +406,34 @@ int CPU::executeOperation()
         case 0xDF: unimplementedInstruction(); break;
         
         case 0xE0: unimplementedInstruction(); break;
-        case 0xE1: unimplementedInstruction(); break;
+        case POPH:
+            registerH = memory[sp+1];
+            registerL = memory[sp];
+            sp+=2;
+            break;
         case 0xE2: unimplementedInstruction(); break;
         case 0xE3: unimplementedInstruction(); break;
         case 0xE4: unimplementedInstruction(); break;
-        case 0xE5: unimplementedInstruction(); break;
+        case PUSHH:
+            memory[sp-1] = registerH;
+            memory[sp-2] = registerL;
+            sp-=2;
+            break;
         case 0xE6: unimplementedInstruction(); break;
         case 0xE7: unimplementedInstruction(); break;
         case 0xE8: unimplementedInstruction(); break;
         case 0xE9: unimplementedInstruction(); break;
         case 0xEA: unimplementedInstruction(); break;
-        case 0xEB: unimplementedInstruction(); break;
+        case XCHG:
+        {
+            uint8_t temp1 = registerD;
+            uint8_t temp2 = registerE;
+            registerD = registerH;
+            registerE = registerL;
+            registerH = temp1;
+            registerL = temp2;
+        }
+            break;
         case 0xEC: unimplementedInstruction(); break;
         case 0xED: unimplementedInstruction(); break;
         case 0xEE: unimplementedInstruction(); break;
