@@ -39,6 +39,8 @@ private:
     
     bool HLT;   //Halt Flag
     
+    bool interruptsEnabled;
+    
     int executeOperation();
     
     void unimplementedInstruction();

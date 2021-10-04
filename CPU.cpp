@@ -87,13 +87,23 @@ int CPU::executeOperation()
         case 0x0A: unimplementedInstruction(); break;
         case 0x0B: unimplementedInstruction(); break;
         case 0x0C: unimplementedInstruction(); break;
-        case DCRC: unimplementedInstruction(); break;
+        case DCRC:
+        {
+            uint16_t result = registerC - 1;
+            Z = (result == 0);
+            S = ((result & 0x80) == 0x80);
+            P = parity(result);
+            registerC = result;
+        }
+            break;
         case MVIC:
             registerC = memory[pc+1];
             readBytes+=1;
             break;
-        case 0x0F: unimplementedInstruction(); break;
-        
+        case RRC:
+            C = (registerA & 1);
+            registerA = (registerA >> 1) | (registerA & 1)<< 7;
+            break;
         case 0x10: unimplementedInstruction(); break;
         case LXID:
             registerD = memory[pc+2];
@@ -172,7 +182,10 @@ int CPU::executeOperation()
             sp = (memory[pc+2] << 8) | memory[pc+1];
             readBytes +=2;
             break;
-        case 0x32: unimplementedInstruction(); break;
+        case STA:
+            memory[(memory[pc+2] << 8) | memory[pc+1]] = registerA;
+            readBytes +=2;
+            break;
         case 0x33: unimplementedInstruction(); break;
         case 0x34: unimplementedInstruction(); break;
         case 0x35: unimplementedInstruction(); break;
@@ -183,11 +196,17 @@ int CPU::executeOperation()
         case 0x37: unimplementedInstruction(); break;
         case 0x38: unimplementedInstruction(); break;
         case 0x39: unimplementedInstruction(); break;
-        case 0x3A: unimplementedInstruction(); break;
+        case LDA:
+            registerA = memory[(memory[pc+2] << 8) | memory[pc+1]];
+            readBytes +=2;
+            break;
         case 0x3B: unimplementedInstruction(); break;
         case 0x3C: unimplementedInstruction(); break;
         case 0x3D: unimplementedInstruction(); break;
-        case 0x3E: unimplementedInstruction(); break;
+        case MVIA:
+            registerA = memory[pc+1];
+            readBytes +=1;
+            break;
         case 0x3F: unimplementedInstruction(); break;
         
         case 0x40: unimplementedInstruction(); break;
@@ -213,7 +232,9 @@ int CPU::executeOperation()
         case 0x53: unimplementedInstruction(); break;
         case 0x54: unimplementedInstruction(); break;
         case 0x55: unimplementedInstruction(); break;
-        case 0x56: unimplementedInstruction(); break;
+        case MOVDM:
+            registerD = memory[(registerH << 8) | registerL];
+            break;
         case 0x57: unimplementedInstruction(); break;
         case 0x58: unimplementedInstruction(); break;
         case 0x59: unimplementedInstruction(); break;
@@ -221,7 +242,9 @@ int CPU::executeOperation()
         case 0x5B: unimplementedInstruction(); break;
         case 0x5C: unimplementedInstruction(); break;
         case 0x5D: unimplementedInstruction(); break;
-        case 0x5E: unimplementedInstruction(); break;
+        case MOVEM:
+            registerE = memory[(registerH << 8) | registerL];
+            break;
         case 0x5F: unimplementedInstruction(); break;
         
         case 0x60: unimplementedInstruction(); break;
@@ -230,7 +253,9 @@ int CPU::executeOperation()
         case 0x63: unimplementedInstruction(); break;
         case 0x64: unimplementedInstruction(); break;
         case 0x65: unimplementedInstruction(); break;
-        case 0x66: unimplementedInstruction(); break;
+        case MOVHM:
+            registerH = memory[(registerH << 8) | registerL];
+            break;
         case 0x67: unimplementedInstruction(); break;
         case 0x68: unimplementedInstruction(); break;
         case 0x69: unimplementedInstruction(); break;
@@ -254,13 +279,19 @@ int CPU::executeOperation()
             break;
         case 0x78: unimplementedInstruction(); break;
         case 0x79: unimplementedInstruction(); break;
-        case 0x7A: unimplementedInstruction(); break;
-        case 0x7B: unimplementedInstruction(); break;
+        case MOVAD:
+            registerA = registerD;
+            break;
+        case MOVAE:
+            registerA = registerE;
+            break;
         case MOVAH:
             registerA = registerH;
             break;
         case 0x7D: unimplementedInstruction(); break;
-        case 0x7E: unimplementedInstruction(); break;
+        case MOVAM:
+            registerA = memory[(registerH << 8) | registerL];
+            break;
         case 0x7F: unimplementedInstruction(); break;
         
         case 0x80: unimplementedInstruction(); break;
@@ -304,7 +335,13 @@ int CPU::executeOperation()
         case 0xA4: unimplementedInstruction(); break;
         case 0xA5: unimplementedInstruction(); break;
         case 0xA6: unimplementedInstruction(); break;
-        case 0xA7: unimplementedInstruction(); break;
+        case ANAA:
+            registerA = registerA & registerA;
+            C = 0;
+            Z = (registerA == 0);
+            S = ((registerA & 0x80) == 0x80);
+            P = parity(registerA);
+            break;
         case 0xA8: unimplementedInstruction(); break;
         case 0xA9: unimplementedInstruction(); break;
         case 0xAA: unimplementedInstruction(); break;
@@ -312,8 +349,14 @@ int CPU::executeOperation()
         case 0xAC: unimplementedInstruction(); break;
         case 0xAD: unimplementedInstruction(); break;
         case 0xAE: unimplementedInstruction(); break;
-        case 0xAF: unimplementedInstruction(); break;
-        
+        case XRAA:
+            registerA = registerA ^ registerA;
+            C = 0;
+            AC = 0;
+            Z = (registerA == 0);
+            S = ((registerA & 0x80) == 0x80);
+            P = parity(registerA);
+            break;
         case 0xB0: unimplementedInstruction(); break;
         case 0xB1: unimplementedInstruction(); break;
         case 0xB2: unimplementedInstruction(); break;
@@ -356,7 +399,17 @@ int CPU::executeOperation()
             memory[sp-2] = registerC;
             sp-=2;
             break;
-        case 0xC6: unimplementedInstruction(); break;
+        case ADI:
+        {
+            uint16_t result = registerA + memory[pc+1];
+            Z = (result == 0);
+            S = ((result & 0x80) == 0x80);
+            P = parity(result);
+            C = (result > 0xFF);
+            registerA = result;
+        }
+            readBytes+=1;
+            break;
         case 0xC7: unimplementedInstruction(); break;
         case 0xC8: unimplementedInstruction(); break;
         case RET:
@@ -419,7 +472,15 @@ int CPU::executeOperation()
             memory[sp-2] = registerL;
             sp-=2;
             break;
-        case 0xE6: unimplementedInstruction(); break;
+        case ANI:
+            registerA = (registerA & memory[pc+1]);
+            C = 0;
+            AC = 0;
+            Z = (registerA == 0);
+            S = ((registerA & 0x80) == 0x80);
+            P = parity(registerA);
+            readBytes+=1;
+            break;
         case 0xE7: unimplementedInstruction(); break;
         case 0xE8: unimplementedInstruction(); break;
         case 0xE9: unimplementedInstruction(); break;
@@ -440,17 +501,41 @@ int CPU::executeOperation()
         case 0xEF: unimplementedInstruction(); break;
         
         case 0xF0: unimplementedInstruction(); break;
-        case 0xF1: unimplementedInstruction(); break;
+        case POPPSW:
+        {
+            uint8_t psw = memory[sp];
+            C = (psw & 1);
+            psw = psw >> 2;
+            P = (psw & 1);
+            psw = psw >> 2;
+            AC = (psw & 1);
+            psw = psw >> 2;
+            Z = (psw & 1);
+            psw = psw >> 1;
+            S = (psw & 1);
+            registerA = memory[sp+1];
+            sp+=2;
+        }
+            break;
         case 0xF2: unimplementedInstruction(); break;
         case 0xF3: unimplementedInstruction(); break;
         case 0xF4: unimplementedInstruction(); break;
-        case 0xF5: unimplementedInstruction(); break;
+        case PUSHPSW:
+        {
+            uint8_t psw = (S << 7 | Z << 6 | 0 << 5 | AC << 4 | 0 << 3 | P << 2 | 1 << 1 | C); //See CPU manual
+            memory[sp-1] = registerA;
+            memory[sp-2] = psw;
+            sp-=2;
+        }
+            break;
         case 0xF6: unimplementedInstruction(); break;
         case 0xF7: unimplementedInstruction(); break;
         case 0xF8: unimplementedInstruction(); break;
         case 0xF9: unimplementedInstruction(); break;
         case 0xFA: unimplementedInstruction(); break;
-        case 0xFB: unimplementedInstruction(); break;
+        case EI:
+            interruptsEnabled = true;
+            break;
         case 0xFC: unimplementedInstruction(); break;
         case 0xFD: unimplementedInstruction(); break;
         case CPI:
