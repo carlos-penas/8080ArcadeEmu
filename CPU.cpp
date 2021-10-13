@@ -28,6 +28,10 @@ CPU::CPU() {
     P  = false;
     
     HLT = false;
+    
+    shiftRegister = 0xA000;
+    shiftOffset = 8;
+    
 }
 
 void CPU::loadProgram(unsigned char *program, int size)
@@ -39,7 +43,18 @@ void CPU::run()
 {
     while(!HLT)
     {
-        pc += executeOperation();
+        if(memory[pc] == IN)
+        {
+            registerA = input(memory[pc+1]);
+            pc+=2;
+        }
+        else if(memory[pc] == OUT)
+        {
+            output(memory[pc+1],registerA);
+            pc+=2;
+        }else
+            pc += executeOperation();
+        
     }
     printf("Halting the system...\n");
 }
@@ -573,4 +588,34 @@ int CPU::parity(uint8_t value)
         value = value >> 1;
     }
     return (number%2 == 0);
+}
+
+//Machine methods
+uint8_t CPU::input(uint8_t port)
+{
+    uint8_t result = 0;
+    uint16_t res = 0;
+    
+    switch(port)
+    {
+        case 3:
+            result = (shiftRegister >> shiftOffset);
+            break;
+    }
+    
+    return result;
+}
+
+void CPU::output(uint8_t port, uint8_t value)
+{
+    switch(port)
+    {
+        case 2:
+            shiftOffset = value & 0x7;
+            break;
+        
+        case 4:
+            shiftRegister = shiftRegister >> 8;
+            shiftRegister = shiftRegister | (value << 8);
+    }
 }

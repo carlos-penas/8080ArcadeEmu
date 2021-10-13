@@ -46,6 +46,14 @@ private:
     void unimplementedInstruction();
     
     int parity(uint8_t value);
+    
+    //Machine properties
+    uint16_t shiftRegister;
+    uint8_t shiftOffset;
+    
+    //Machine methods
+    uint8_t input(uint8_t port);
+    void output(uint8_t port, uint8_t value);
 
 };
 
